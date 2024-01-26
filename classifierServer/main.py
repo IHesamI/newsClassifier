@@ -1,8 +1,26 @@
-from fastapi import FastAPI
+from fastapi import FastAPI ,Request
+from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 from typing import Union
+import json
 
 app = FastAPI()
+
+
+origins = [
+    "http://localhost.tiangolo.com",
+    "https://localhost.tiangolo.com",
+    "http://localhost",
+    "http://localhost:5173",
+]
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=origins,
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 
 class News(BaseModel):
@@ -14,7 +32,10 @@ class News(BaseModel):
 async def root():
     return {"message": "Hello World"}
 
-
 @app.post("/")
-async def getText(example:News):
-    return {"message": "Hello World"}
+async def getText(request:Request):
+    result = await request.body()
+    body:News=json.loads(result)
+    print('result ',body['text'])
+    
+    return json.dumps({'statusCode':'200'})
