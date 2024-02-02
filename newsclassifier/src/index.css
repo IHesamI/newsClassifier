@@ -1,0 +1,53 @@
+html, body {
+    height: 100%;
+  }
+  body{
+    background: url('../assets/bg.jpg');
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;  
+    overflow: hidden;
+    margin: 0;
+  }
+
+  :root{
+    --columnsBackground:rgb(108, 110, 109);
+  }
+
+/* h3{} */
+
+.scroll-container { 
+  overflow-y: scroll; 
+} 
+
+.scroll-container::-webkit-scrollbar { 
+  width: 4px; 
+  margin-left: 10px;
+  cursor: pointer;
+
+} 
+
+
+.scroll-container::-webkit-scrollbar-thumb { 
+  background: #888; 
+  border-radius: 10px;
+  height: 3px;
+} 
+
+.scroll-container::-webkit-scrollbar-thumb:hover { 
+  background: #555; 
+} 
+
+.scroll-container::-webkit-scrollbar-button { 
+  display: none; 
+} 
+
+.scroll-container::-webkit-scrollbar-track-piece:end {
+  background: transparent;
+  margin-bottom: 10px; 
+}
+
+.scroll-container::-webkit-scrollbar-track-piece:start {
+  background: transparent;
+  margin-top: 10px;
+}
