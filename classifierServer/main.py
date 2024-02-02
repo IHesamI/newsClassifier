@@ -1,8 +1,14 @@
-from fastapi import FastAPI ,Request
+from fastapi import FastAPI, Request
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 from typing import Union
 import json
+
+
+from classifierClass import textClassifier
+
+myClassifier = textClassifier()
+
 
 app = FastAPI()
 
@@ -32,10 +38,11 @@ class News(BaseModel):
 async def root():
     return {"message": "Hello World"}
 
+
 @app.post("/")
-async def getText(request:Request):
+async def getText(request: Request):
     result = await request.body()
-    body:News=json.loads(result)
-    print('result ',body['text'])
-    
-    return json.dumps({'statusCode':'200'})
+    body: News = json.loads(result)
+    text = body['text']
+    result = myClassifier.predict(text)
+    return result
